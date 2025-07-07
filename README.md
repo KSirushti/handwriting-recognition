@@ -6,12 +6,12 @@ This project is a real-time handwriting recognition system built to assist child
 
 ## 🔍 Features
 
-- 🎨 Draw characters in real-time using a canvas interface
-- 📦 Roboflow cloud-based model integration for A–Z classification
-- 📡 FastAPI backend for handling predictions and file uploads
-- 🔒 CORS-compliant and React-compatible API
-- ⚡ Instant feedback with predicted character and confidence score
-- 📐 Scalable architecture for future NLP grammar correction, sentence building, and learning loop (planned Phase 4)
+- Draw characters in real-time using a canvas interface
+- Roboflow cloud-based model integration for A–Z classification
+- FastAPI backend for handling predictions and file uploads
+- CORS-compliant and React-compatible API
+- Instant feedback with predicted character and confidence score
+- Scalable architecture for future NLP grammar correction, sentence building, and learning loop (planned Phase 4)
 
 ---
 
@@ -37,6 +37,6 @@ uvicorn main:app --reload
 
 - npm install
 - npm start
-- 
-- Make sure localhost:3000 (React) and localhost:8000 (FastAPI) are running.
+---
+Make sure localhost:3000 (React) and localhost:8000 (FastAPI) are running.
 
