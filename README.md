@@ -35,7 +35,8 @@ uvicorn main:app --reload
 
 ### Frontend (React)
 
-npm install
-npm start
-Make sure localhost:3000 (React) and localhost:8000 (FastAPI) are running.
+- npm install
+- npm start
+- 
+- Make sure localhost:3000 (React) and localhost:8000 (FastAPI) are running.
 
