@@ -26,7 +26,7 @@ This project is an AI-powered handwriting recognition assistant designed to help
 ---
 ## How to Run
 
-### 🖥️ Frontend (React)
+### Frontend (React)
 
 1. Navigate to the frontend folder:
 
@@ -38,8 +38,10 @@ This project is an AI-powered handwriting recognition assistant designed to help
    ```bash
       npm install
 
-3.Start the development server:
-   
+3. Start Development server:
+
+   ```bash
+      npm start
 ---
 
 ### Backend (FastAPI)
@@ -47,6 +49,22 @@ This project is an AI-powered handwriting recognition assistant designed to help
 
    ```bash
    cd backend
+2. Create and activate a virtual environment:
+
+   ```bash
+      python -m venv venv
+      source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+3. Start Development server:
+
+   ```bash
+   pip install -r requirements.txt
+
+
+2. Install dependencies:
+
+   ```bash
+      npm install
 
 
 
