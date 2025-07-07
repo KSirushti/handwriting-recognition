@@ -61,5 +61,35 @@ This project uses a **Roboflow Hosted Inference API** for character detection an
 In `frontend/api/roboflowAPI.js`, update the following:
 
 ```javascript
-const API_KEY = "YOUR_ROBOFLOW_API_KEY";  // Replace with your own key
+   const API_KEY = "YOUR_ROBOFLOW_API_KEY";  // Replace with your own key
 
+## 🖼️ Screenshots
+
+<!-- Add your screenshots here -->
+<!-- ![Canvas and Prediction UI](./assets/ui-screenshot.png) -->
+
+---
+
+## 📊 Data Logging
+
+Corrected samples are stored under:
+
+```bash
+backend/data/corrections/<CorrectLabel>/<filename>.png
+A corrections.csv log is also maintained, recording the image path and corrected label for fine-tuning and retraining purposes.
+
+🧠 Future Enhancements
+🔡 NLP-based correction and word disambiguation
+
+🔁 Model retraining from collected corrections
+
+✍️ Multi-character word recognition
+
+👤 User login and personalized learning
+
+🤝 Acknowledgements
+Roboflow — Hosted Inference API
+
+FastAPI — Modern Python backend
+
+React — Interactive frontend UI
