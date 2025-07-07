@@ -36,20 +36,30 @@ This project is an AI-powered handwriting recognition assistant designed to help
 2. Install dependencies:
 
    ```bash
-   npm install
-
-3. Start the development server:
-
-   ```bash
-   npm start
-
-
-
-
-
-
+      npm install
 
 3.Start the development server:
+   
+---
+
+### Backend (FastAPI)
+1. Navigate to the backend folder:
 
    ```bash
-   npm start
+   cd backend
+
+
+
+## 🔐 API Key Setup
+
+This project uses a **Roboflow Hosted Inference API** for character detection and classification.
+
+> **IMPORTANT:** You must replace the placeholder API key with your own.
+
+### How to Set It:
+
+In `frontend/api/roboflowAPI.js`, update the following:
+
+```javascript
+const API_KEY = "YOUR_ROBOFLOW_API_KEY";  // Replace with your own key
+
