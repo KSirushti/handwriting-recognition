@@ -60,13 +60,11 @@ This project is an AI-powered handwriting recognition assistant designed to help
    ```bash
    pip install -r requirements.txt
 
-
-2. Install dependencies:
+4. Run the FastAPI server:
 
    ```bash
-      npm install
-
-
+      uvicorn main:app --reload
+---
 
 ## 🔐 API Key Setup
 
@@ -78,36 +76,31 @@ This project uses a **Roboflow Hosted Inference API** for character detection an
 
 In `frontend/api/roboflowAPI.js`, update the following:
 
-```javascript
-   const API_KEY = "YOUR_ROBOFLOW_API_KEY";  // Replace with your own key
-
-## 🖼️ Screenshots
-
-<!-- Add your screenshots here -->
-<!-- ![Canvas and Prediction UI](./assets/ui-screenshot.png) -->
+      const API_KEY = "YOUR_ROBOFLOW_API_KEY";  // Replace with your own key   
 
 ---
 
-## 📊 Data Logging
+## 🖼️ Screenshots
 
+
+---
+
+## Data Logging
 Corrected samples are stored under:
 
-```bash
-backend/data/corrections/<CorrectLabel>/<filename>.png
+   `backend/data/corrections/<CorrectLabel>/<filename>.png`
+
 A corrections.csv log is also maintained, recording the image path and corrected label for fine-tuning and retraining purposes.
 
-🧠 Future Enhancements
-🔡 NLP-based correction and word disambiguation
+---
+## Future Enhancements
+- NLP-based correction and word disambiguation
+- Model retraining from collected corrections
+- Multi-character word recognition
+- User login and personalized learning
 
-🔁 Model retraining from collected corrections
-
-✍️ Multi-character word recognition
-
-👤 User login and personalized learning
-
-🤝 Acknowledgements
-Roboflow — Hosted Inference API
-
-FastAPI — Modern Python backend
-
-React — Interactive frontend UI
+---
+## Acknowledgements
+- Roboflow — Hosted Inference API
+- FastAPI — Modern Python backend
+- React — Interactive frontend UI
