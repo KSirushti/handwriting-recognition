@@ -1,18 +1,13 @@
-# main.py
 from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.responses import JSONResponse
+from inference_sdk import InferenceHTTPClient
 from PIL import Image
-from pydantic import BaseModel
-from fastapi import HTTPException
-import io
-import os
-import base64
 from uuid import uuid4
+import io, os
 
 app = FastAPI()
 
-# Enable CORS for React frontend
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:3000"],
@@ -21,41 +16,41 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+client = InferenceHTTPClient(
+    api_url="https://serverless.roboflow.com",
+    api_key="YOUR_API_KEY"  # Replace this
+)
 
 @app.post("/predict")
 async def predict(file: UploadFile = File(...)):
-    if not file:
-        return JSONResponse(content={"error": "No file received"}, status_code=400)
-
     try:
         contents = await file.read()
         image = Image.open(io.BytesIO(contents)).convert("RGB")
 
-        # TODO: Replace with your real Roboflow or model logic
-        print("Image received for prediction.")
-        return {"prediction": "S", "confidence": 0.98}
+        temp_path = f"temp_{uuid4().hex[:8]}.jpg"
+        image.save(temp_path)
+
+        try:
+            result = client.run_workflow(
+                workspace_name="siru",
+                workflow_id="active-learning",
+                images={"image": temp_path},
+                use_cache=True
+            )
+        except Exception as e:
+            os.remove(temp_path)
+            return JSONResponse(content={"error": f"Roboflow Error: {str(e)}"}, status_code=500)
+
+        os.remove(temp_path)
+
+        try:
+            prediction_data = result['results'][0]['predictions'][0]
+            return {
+                "prediction": prediction_data['class'],
+                "confidence": round(prediction_data['confidence'], 4)
+            }
+        except (KeyError, IndexError):
+            return JSONResponse(content={"error": "No predictions returned by Roboflow."}, status_code=500)
 
     except Exception as e:
         return JSONResponse(content={"error": str(e)}, status_code=500)
-
-CORRECTION_DIR = "data/corrections"
-
-class CorrectionRequest(BaseModel):
-    image: str
-    label: str
-
-@app.post("/corrections")
-def save_correction(data: CorrectionRequest):
-    try:
-        label = data.label.upper()
-        folder_path = os.path.join(CORRECTION_DIR, label)
-        os.makedirs(folder_path, exist_ok=True)
-
-        image_data = base64.b64decode(data.image.split(",")[1])
-        filename = f"{label}_{uuid4().hex[:8]}.png"
-        with open(os.path.join(folder_path, filename), "wb") as f:
-            f.write(image_data)
-
-        return {"message": "Correction saved", "path": f"{folder_path}/{filename}"}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
