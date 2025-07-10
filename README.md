@@ -1,4 +1,4 @@
-# Real-Time Assistive Handwriting Recognition System
+# Real-Time Assistive Recognition System
 
 This project is an AI-powered handwriting recognition assistant designed to help users classify handwritten A–Z characters in real-time. It features a canvas-based UI for drawing, backend-powered prediction using the Roboflow API, and supports user corrections to continuously improve the model.
 
