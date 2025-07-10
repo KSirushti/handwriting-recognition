@@ -74,7 +74,7 @@ This project uses a **Roboflow Hosted Inference API** for character detection an
 
 ### How to Set It:
 
-In `frontend/api/roboflowAPI.js`, update the following:
+In `backend/main.py`, update the following:
 
       const API_KEY = "YOUR_ROBOFLOW_API_KEY";  // Replace with your own key   
 
