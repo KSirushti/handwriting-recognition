@@ -19,7 +19,7 @@ app.add_middleware(
 
 client = InferenceHTTPClient(
     api_url="https://serverless.roboflow.com",
-    api_key="km1lBlePpnFiHGkxqpRq"  # Replace this
+    api_key="Your_API_Key"  # Replace this 
 )
 
 
