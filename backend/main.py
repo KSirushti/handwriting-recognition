@@ -1,10 +1,11 @@
-from fastapi import FastAPI, UploadFile, File
+from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.responses import JSONResponse
 from inference_sdk import InferenceHTTPClient
 from PIL import Image
 from uuid import uuid4
-import io, os
+import io, os, base64
+from pydantic import BaseModel
 
 app = FastAPI()
 
@@ -18,9 +19,15 @@ app.add_middleware(
 
 client = InferenceHTTPClient(
     api_url="https://serverless.roboflow.com",
-    api_key="YOUR_API_KEY"  # Replace this
+    api_key="km1lBlePpnFiHGkxqpRq"  # Replace this
 )
 
+
+CORRECTION_DIR = "data/corrections"
+
+class CorrectionRequest(BaseModel):
+    image: str
+    label: str
 @app.post("/predict")
 async def predict(file: UploadFile = File(...)):
     try:
@@ -54,3 +61,22 @@ async def predict(file: UploadFile = File(...)):
 
     except Exception as e:
         return JSONResponse(content={"error": str(e)}, status_code=500)
+
+
+@app.post("/corrections")
+async def save_correction(data: CorrectionRequest):
+    try:
+        label = data.label.upper()
+        folder_path = os.path.join(CORRECTION_DIR, label)
+        os.makedirs(folder_path, exist_ok=True)
+
+        image_data = base64.b64decode(data.image.split(",")[1])
+        filename = f"{label}_{uuid4().hex[:8]}.png"
+        file_path = os.path.join(folder_path, filename)
+
+        with open(file_path, "wb") as f:
+            f.write(image_data)
+
+        return {"message": "Correction saved", "path": file_path}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
