@@ -82,7 +82,8 @@ In `backend/main.py`, update the following:
 
 ## 🖼️ Screenshots
 
-![img1](https://github.com/user-attachments/assets/a7e6de44-3d08-4aef-bc15-5fc7ce1b1419)
+<img width="1267" height="606" alt="image" src="https://github.com/user-attachments/assets/ed52f5db-ba97-486b-a20d-884d148afde5" />
+
 
 ---
 
